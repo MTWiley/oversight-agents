@@ -1,0 +1,35 @@
+# .oversight.yml for a network infrastructure project
+# Typical contents: device configs, Ansible network automation, Nornir/NAPALM scripts
+
+project:
+  name: network-automation
+  type: networking
+
+agents:
+  always:
+    - security
+    - networking
+  disabled:
+    - accessibility
+    - testing
+    - compliance
+  config:
+    security:
+      severity-threshold: low
+      custom-rules:
+        - "No SNMP v1/v2c — require v3 with auth and encryption"
+        - "No telnet — require SSH v2 only"
+        - "No plaintext passwords — require type 8/9 (scrypt)"
+    networking:
+      severity-threshold: low
+    devops:
+      severity-threshold: medium
+    quality:
+      severity-threshold: medium
+
+# File patterns to exclude from all reviews
+exclude:
+  - "backup/"
+  - "archive/"
+  - "*.bak"
+  - "*.old"

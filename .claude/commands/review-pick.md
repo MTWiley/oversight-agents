@@ -10,18 +10,18 @@ You run a specific subset of review agents chosen by the user.
 - `security,quality` — Run security and quality agents on changed files
 - `security,devops full` — Run security and devops agents on entire repo
 - `architecture src/` — Run architecture agent on src/ directory
-- `security,quality,architecture,devops full` — Run all Phase 1 agents on entire repo
+- `security,quality,architecture,devops full` — Run core agents on entire repo
+- `networking,security` — Run networking and security agents on changed files
+- `testing,quality src/` — Run testing and quality agents on src/
 
 **Parse rules:**
 1. Split `$ARGUMENTS` by whitespace into tokens
 2. First token is a comma-separated list of agent names
 3. Remaining tokens (if any) are the scope (same rules as individual agents: empty/path/"full")
 
-**Valid agent names (Phase 1):** `security`, `quality`, `architecture`, `devops`
+**Valid agent names:** `security`, `quality`, `architecture`, `devops`, `docs`, `planning`, `testing`, `compliance`, `networking`, `virtualization`, `storage`, `compute`, `accessibility`, `observability`
 
-**Phase 2 agent names (not yet available):** `docs`, `planning`, `testing`, `compliance`, `networking`, `virtualization`, `storage`, `compute`, `accessibility`
-
-If an invalid or Phase 2 agent name is provided, warn the user and skip it. If no valid agents remain, inform the user and list available agents.
+If an invalid agent name is provided, warn the user and skip it. If no valid agents remain, inform the user and list available agents.
 
 ## Scope
 
@@ -39,6 +39,16 @@ For each requested agent, perform its full review using the same criteria as the
 - **quality**: Code smells, anti-patterns, maintainability
 - **architecture**: Design patterns, scalability, coupling/cohesion
 - **devops**: CI/CD patterns, IaC hygiene, container best practices
+- **docs**: Technical writing, reproducibility, customer-facing quality
+- **planning**: Project planning, progress tracking, stakeholder communication
+- **testing**: Test coverage, test quality, edge cases, test strategy
+- **compliance**: License compatibility, regulatory compliance, audit readiness
+- **networking**: Routing/switching, firewall/ACL, DNS/load balancing, segmentation
+- **virtualization**: Hypervisor config, HA/DRS, resource allocation, templates
+- **storage**: RAID/replication, backup strategy, volume management
+- **compute**: Server config, firmware lifecycle, capacity planning
+- **accessibility**: WCAG 2.1 standards, ARIA patterns
+- **observability**: Logging, log correlation, metrics, tracing, alerting/SLOs
 
 ## Output
 

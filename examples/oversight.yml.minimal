@@ -1,0 +1,13 @@
+# Minimal .oversight.yml configuration
+# Place this file in the root of your project to customize oversight behavior.
+
+project:
+  name: my-project
+
+# Agent configuration (all optional)
+agents:
+  # Agents that always run regardless of file detection
+  # always: [security]
+
+  # Agents that never run even if files are detected
+  # disabled: [accessibility]

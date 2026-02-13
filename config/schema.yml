@@ -43,6 +43,7 @@ schema:
         - storage
         - compute
         - accessibility
+        - observability
 
     disabled:
       description: "Agents that never run even if files match"

@@ -1,0 +1,32 @@
+# .oversight.yml for an infrastructure-as-code project
+# Typical contents: Terraform, Ansible, Docker, Kubernetes, CI/CD pipelines
+
+project:
+  name: infrastructure
+  type: infrastructure
+
+agents:
+  always:
+    - security
+    - devops
+  disabled:
+    - accessibility
+  config:
+    security:
+      severity-threshold: low
+    devops:
+      severity-threshold: low
+    architecture:
+      severity-threshold: medium
+    compliance:
+      severity-threshold: medium
+    observability:
+      severity-threshold: medium
+
+# File patterns to exclude from all reviews
+exclude:
+  - ".terraform/"
+  - "**/.terraform.lock.hcl"
+  - "*.tfstate"
+  - "*.tfstate.backup"
+  - "vendor/"

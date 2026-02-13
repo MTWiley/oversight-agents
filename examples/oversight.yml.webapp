@@ -1,0 +1,42 @@
+# .oversight.yml for a web application project
+# Typical stack: React/Vue/Angular frontend, Node/Python/Go backend, PostgreSQL, Docker
+
+project:
+  name: my-webapp
+  type: webapp
+
+agents:
+  always:
+    - security
+    - quality
+  disabled:
+    - networking
+    - virtualization
+    - storage
+    - compute
+  config:
+    security:
+      severity-threshold: low
+    quality:
+      severity-threshold: low
+      max-function-length: 50
+      max-parameters: 5
+      max-nesting-depth: 3
+    devops:
+      severity-threshold: medium
+    accessibility:
+      severity-threshold: medium
+    testing:
+      severity-threshold: medium
+
+# File patterns to exclude from all reviews
+exclude:
+  - "vendor/"
+  - "node_modules/"
+  - "dist/"
+  - "build/"
+  - "*.min.js"
+  - "*.min.css"
+  - "*.bundle.js"
+  - "coverage/"
+  - "__snapshots__/"

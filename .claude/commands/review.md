@@ -36,23 +36,38 @@ Scan the file list and activate agents based on these patterns:
 | `*.py`, `*.js`, `*.ts`, `*.go`, `*.java`, `*.rb`, `*.rs`, `*.c`, `*.cpp`, `*.cs`, `*.php`, `*.swift`, `*.kt` | quality |
 | `*.tf`, `*.tfvars`, `terraform/`, `*.yaml`/`*.yml` (with k8s/helm content), `Dockerfile*`, `docker-compose*`, `.github/workflows/*`, `Jenkinsfile`, `*.groovy` (pipeline), `.gitlab-ci.yml`, `ansible/`, `*.playbook.yml` | devops |
 | Any source code files (same as quality list) | architecture |
-| `*.html`, `*.jsx`, `*.tsx`, `*.vue`, `*.svelte` | accessibility (Phase 2) |
-| `*.md`, `docs/`, `README*`, `CHANGELOG*` | documentation (Phase 2) |
-| `package.json`, `go.mod`, `requirements.txt`, `Gemfile`, `Cargo.toml`, `pom.xml`, `*.csproj`, `composer.json` | compliance (Phase 2) |
-| `*test*`, `*spec*`, `__tests__/`, `test/`, `tests/` | testing (Phase 2) |
-| Network device configs (files containing `router bgp`, `router ospf`, `access-list`, `ip route`, `interface` keywords; Ansible network playbooks with `ios_*`/`nxos_*`/`junos_*` modules; NAPALM/Nornir inventory) | networking (Phase 2) |
-| `*.vmx`, `*.ovf`, `*.ova`, vSphere/Proxmox/Hyper-V configs | virtualization (Phase 2) |
-| ZFS/LVM/RAID configs, `*.zpool`, storage-related YAML | storage (Phase 2) |
-| BIOS/IPMI/iDRAC/iLO configs, server hardware manifests | compute (Phase 2) |
+| `*.html`, `*.jsx`, `*.tsx`, `*.vue`, `*.svelte` | accessibility |
+| `*.md`, `docs/`, `README*`, `CHANGELOG*` | documentation |
+| `PLAN.md`, `ROADMAP.md`, `CHANGELOG*`, `adr/`, `decisions/`, `VERSION` | planning |
+| `package.json`, `go.mod`, `requirements.txt`, `Gemfile`, `Cargo.toml`, `pom.xml`, `*.csproj`, `composer.json`, `LICENSE*` | compliance |
+| `*test*`, `*spec*`, `__tests__/`, `test/`, `tests/`, `jest.config.*`, `pytest.ini`, `vitest.config.*` | testing |
+| Network device configs (files containing `router bgp`, `router ospf`, `access-list`, `ip route`, `interface` keywords; Ansible network playbooks with `ios_*`/`nxos_*`/`junos_*` modules; NAPALM/Nornir inventory) | networking |
+| `*.vmx`, `*.ovf`, `*.ova`, files containing `vcenter`/`esxi`/`vsphere`/`proxmox`/`libvirt`/`hypervisor` keywords; Terraform `vsphere_*`/`proxmox_*` resources; Packer templates | virtualization |
+| ZFS/LVM/RAID configs (files containing `zpool`/`zfs`/`mdadm`/`lvcreate`/`pvcreate`), Kubernetes `PersistentVolume`/`StorageClass`, cloud storage configs | storage |
+| BMC/IPMI/iDRAC/iLO configs (files containing `ipmi`/`idrac`/`ilo`/`redfish`/`bios`/`firmware` keywords), server hardware manifests, provisioning templates (kickstart, preseed, autoinstall) | compute |
+| Files containing logging/metrics/tracing libraries (`structlog`/`zerolog`/`zap`/`pino`/`winston`/`prometheus`/`opentelemetry`), monitoring configs (`prometheus.yml`, `alertmanager.yml`, `grafana/`), health check endpoints | observability |
 
-### Currently Available Agents (Phase 1)
+### Available Agents
 
-Only invoke these agents — others are not yet implemented:
+All agents are implemented and available:
 
+**Core agents (always considered):**
 1. **security** — Always runs
 2. **quality** — Runs when source code files are present
 3. **architecture** — Runs when source code files are present
 4. **devops** — Runs when CI/CD, IaC, or container files are present
+
+**Domain agents (activated by detection):**
+5. **documentation** — Runs when documentation files are present
+6. **planning** — Runs when planning/project management files are present
+7. **testing** — Runs when test files or test config are present
+8. **compliance** — Runs when package manifests or license files are present
+9. **networking** — Runs when network configurations are detected
+10. **virtualization** — Runs when hypervisor configs are detected
+11. **storage** — Runs when storage configurations are detected
+12. **compute** — Runs when server/hardware configs are detected
+13. **accessibility** — Runs when UI/frontend files are present
+14. **observability** — Runs when logging/metrics/tracing code is detected
 
 ## Execution
 
@@ -69,6 +84,36 @@ Follow the complete architecture review criteria: design patterns, scalability, 
 
 ### DevOps Review Pass
 Follow the complete DevOps review criteria: CI/CD patterns, IaC hygiene, and container best practices. Evaluate infrastructure and pipeline files in scope.
+
+### Documentation Review Pass
+Follow the complete documentation review criteria: technical writing quality, reproducibility, and customer-facing quality. Evaluate documentation files in scope.
+
+### Planning Review Pass
+Follow the complete planning review criteria: project planning, progress tracking, and stakeholder communication. Evaluate planning artifacts in scope.
+
+### Testing Review Pass
+Follow the complete testing review criteria: test coverage, test quality, edge cases, and test strategy. Evaluate test files and source files in scope.
+
+### Compliance Review Pass
+Follow the complete compliance review criteria: license compatibility, regulatory compliance, and audit readiness. Evaluate package manifests, license files, and related artifacts in scope.
+
+### Networking Review Pass
+Follow the complete networking review criteria: routing/switching, firewall/ACL, DNS/load balancing, and segmentation. Evaluate network configurations and automation in scope.
+
+### Virtualization Review Pass
+Follow the complete virtualization review criteria: hypervisor configuration, HA/DRS, resource allocation, and template management. Evaluate virtualization configs in scope.
+
+### Storage Review Pass
+Follow the complete storage review criteria: RAID/replication, backup strategy, and volume management. Evaluate storage configurations in scope.
+
+### Compute Review Pass
+Follow the complete compute review criteria: server configuration, firmware lifecycle, and capacity planning. Evaluate server/hardware configs in scope.
+
+### Accessibility Review Pass
+Follow the complete accessibility review criteria: WCAG 2.1 standards and ARIA patterns. Evaluate UI/frontend files in scope.
+
+### Observability Review Pass
+Follow the complete observability review criteria: logging standards, log correlation, metrics instrumentation, distributed tracing, and alerting/SLOs. Evaluate source code and monitoring configs in scope.
 
 ## Output
 
