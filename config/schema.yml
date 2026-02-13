@@ -5,6 +5,10 @@ schema:
   version: 1
 
   project:
+    name:
+      description: "Project name for report headers"
+      type: string
+      required: false
     type:
       description: "Project type hint for agent detection"
       type: string

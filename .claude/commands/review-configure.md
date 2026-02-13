@@ -28,7 +28,9 @@ You help the user view or initialize their project's oversight configuration.
 
 ## Action: Init
 
-Generate an `.oversight.yml` file in the project root. First, analyze the project to make intelligent defaults:
+Generate an `.oversight.yml` file in the project root. If `.oversight.yml` already exists, display its contents and ask the user whether to overwrite, merge with new detections, or abort. Do not silently overwrite an existing config.
+
+If no existing config, analyze the project to make intelligent defaults:
 
 1. Scan the project structure to detect the project type:
    - Look for language-specific files (package.json, go.mod, requirements.txt, Cargo.toml, etc.)
