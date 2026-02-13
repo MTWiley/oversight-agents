@@ -1,6 +1,6 @@
 # Customer-Facing Documentation Reference Checklist
 
-Canonical reference for evaluating documentation intended for external users, customers, and integrators. Customer-facing documentation has higher standards than internal documentation because it represents the product, shapes user success, and directly affects support burden and adoption. Complements the inlined criteria in `review-documentation.md`.
+Canonical reference for evaluating documentation intended for external users, customers, and integrators. Customer-facing documentation has higher standards than internal documentation because it represents the product, shapes user success, and directly affects support burden and adoption. Complements the inlined criteria in `review-docs.md`.
 
 The `documentation-reviewer` agent uses this file as a lookup when evaluating customer-facing documentation. Severity levels follow `criteria/shared/severity-levels.md`.
 

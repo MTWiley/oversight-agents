@@ -46,7 +46,7 @@
 
 <!-- Include this section only if CRITICAL findings exist. -->
 
-#### [CRITICAL] {Finding Title}
+### [CRITICAL] {Finding Title}
 
 - **Agent**: {agent-id}
 - **File**: `{path/to/file}` (lines {X}-{Y})
@@ -65,7 +65,7 @@
 
 <!-- Include this section only if HIGH findings exist. -->
 
-#### [HIGH] {Finding Title}
+### [HIGH] {Finding Title}
 
 - **Agent**: {agent-id}
 - **File**: `{path/to/file}` (lines {X}-{Y})
@@ -84,7 +84,7 @@
 
 <!-- Include this section only if MEDIUM findings exist. -->
 
-#### [MEDIUM] {Finding Title}
+### [MEDIUM] {Finding Title}
 
 - **Agent**: {agent-id}
 - **File**: `{path/to/file}` (lines {X}-{Y})
@@ -103,7 +103,7 @@
 
 <!-- Include this section only if LOW findings exist. -->
 
-#### [LOW] {Finding Title}
+### [LOW] {Finding Title}
 
 - **Agent**: {agent-id}
 - **File**: `{path/to/file}` (lines {X}-{Y})
@@ -117,7 +117,7 @@
 
 <!-- Include this section only if INFO findings exist. -->
 
-#### [INFO] {Finding Title}
+### [INFO] {Finding Title}
 
 - **Agent**: {agent-id}
 - **Category**: {Category Name}

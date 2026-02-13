@@ -22,6 +22,26 @@ agents:
       severity-threshold: low
     devops:
       severity-threshold: low
+    docs:
+      severity-threshold: low
+    planning:
+      severity-threshold: low
+    testing:
+      severity-threshold: low
+    compliance:
+      severity-threshold: low
+    networking:
+      severity-threshold: low
+    virtualization:
+      severity-threshold: low
+    storage:
+      severity-threshold: low
+    compute:
+      severity-threshold: low
+    accessibility:
+      severity-threshold: low
+    observability:
+      severity-threshold: low
 
 # No custom rules by default
 custom-rules: []

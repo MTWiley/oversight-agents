@@ -7,7 +7,7 @@ Reusable Claude Code agents for automated code review across security, quality, 
 Clone this repo once to a permanent location on your machine:
 
 ```bash
-git clone https://github.com/YOUR-ORG/oversight-agents.git ~/tools/oversight-agents
+git clone https://github.com/MTWiley/oversight-agents.git ~/tools/oversight-agents
 ```
 
 That's it. No dependencies, no build step, no package manager. The agents are plain Markdown files that Claude Code reads directly.

@@ -29,9 +29,9 @@ The user works across diverse infrastructure domains at CCIE-equivalent depth, s
 
 ```
 oversight-agents/
+├── .gitignore
 ├── CLAUDE.md                           # Repo-level context for developing ON this repo
 ├── README.md                           # Installation & usage guide
-├── LICENSE
 │
 ├── .claude/
 │   ├── commands/                       # Slash commands (user entry points)
@@ -49,10 +49,11 @@ oversight-agents/
 │   │   ├── review-storage.md           # /review-storage
 │   │   ├── review-compute.md           # /review-compute
 │   │   ├── review-accessibility.md     # /review-accessibility
+│   │   ├── review-observability.md     # /review-observability
 │   │   ├── review-pick.md              # /review-pick security,compliance [full]
 │   │   └── review-configure.md         # /review-configure [init|show]
 │   │
-│   └── settings.json
+│   └── settings.local.json
 │
 ├── criteria/                           # Review checklists (referenced by commands)
 │   ├── shared/
@@ -66,6 +67,10 @@ oversight-agents/
 │   │   ├── technical-writing.md
 │   │   ├── reproducibility.md
 │   │   └── customer-facing.md
+│   ├── planning/
+│   │   ├── project-planning.md
+│   │   ├── progress-tracking.md
+│   │   └── stakeholder-communication.md
 │   ├── quality/
 │   │   ├── code-smells.md
 │   │   ├── anti-patterns.md
@@ -103,6 +108,11 @@ oversight-agents/
 │   │   ├── server-config.md
 │   │   ├── firmware-lifecycle.md
 │   │   └── capacity-planning.md
+│   ├── observability/
+│   │   ├── logging-standards.md
+│   │   ├── log-correlation.md
+│   │   ├── metrics-instrumentation.md
+│   │   └── alerting-tracing.md
 │   └── accessibility/
 │       ├── wcag-standards.md
 │       └── aria-patterns.md
@@ -110,25 +120,7 @@ oversight-agents/
 ├── templates/                          # Output format templates
 │   ├── report-full.md                  # Full structured report
 │   ├── report-summary.md              # Executive summary
-│   ├── finding-inline.md              # Inline annotation format
-│   └── report-ci.md                   # GitHub PR comment format
-│
-├── adapters/                           # Non-slash-command invocation methods
-│   ├── hooks/
-│   │   ├── pre-commit.sh              # Runs security agent on staged files
-│   │   ├── pre-push.sh                # Runs security + quality on branch diff
-│   │   └── install-hooks.sh           # Installs hooks into target repo
-│   ├── ci/
-│   │   └── github-actions/
-│   │       ├── oversight-review.yml   # Reusable GHA workflow
-│   │       └── oversight-pr-review.yml
-│   └── cli/
-│       └── oversight-review.sh        # Standalone CLI wrapper (uses claude -p)
-│
-├── install/
-│   ├── install.sh                     # Symlink-based install into target project
-│   ├── uninstall.sh
-│   └── update.sh
+│   └── finding-inline.md              # Inline annotation format
 │
 ├── config/
 │   ├── defaults.yml                   # Default agent configuration
@@ -140,11 +132,13 @@ oversight-agents/
 │   ├── oversight.yml.infrastructure   # Example config for IaC project
 │   └── oversight.yml.minimal          # Minimal starter config
 │
-└── docs/
-    ├── architecture.md
-    ├── agent-authoring.md
-    ├── customization.md
-    └── ci-integration.md
+│   # Planned (not yet implemented):
+│   # adapters/                        # Git hooks, CI/CD, CLI wrappers (Phase 3)
+│   # install/                         # Install/uninstall scripts (Phase 4)
+│   # docs/                            # Extended documentation (Phase 4)
+│   # templates/report-ci.md           # CI comment format (Phase 3)
+│
+└── PLAN.md                            # This file - implementation roadmap
 ```
 
 ## Architecture Decisions
@@ -315,16 +309,14 @@ Files to create:
 
 **Goal**: All 14 agents operational.
 
-**Status**: Not started (next up)
+**Status**: Complete
 
-Files to create:
+Files created:
 
-1. Remaining 10 agents (command + criteria for each):
-   - Documentation, Planning, Testing, Compliance
-   - Networking, Virtualization, Storage, Compute
-   - Accessibility
-   - Observability (new - logging, metrics, tracing, alerting)
-2. Update orchestrator detection matrix
+1. 10 remaining agents (command + criteria for each):
+   - Documentation, Planning, Testing, Compliance, Observability
+   - Networking, Virtualization, Storage, Compute, Accessibility
+2. Updated orchestrator detection matrix and review-pick agent list
 3. `templates/finding-inline.md`
 4. Example configs in `examples/`
 

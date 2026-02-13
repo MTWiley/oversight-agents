@@ -1,6 +1,6 @@
 # Reproducibility Reference Checklist
 
-Canonical reference for evaluating whether documentation enables readers to successfully reproduce procedures, set up environments, and execute code examples. Complements the inlined criteria in `review-documentation.md`.
+Canonical reference for evaluating whether documentation enables readers to successfully reproduce procedures, set up environments, and execute code examples. Complements the inlined criteria in `review-docs.md`.
 
 The `documentation-reviewer` agent uses this file as a lookup when evaluating documentation reproducibility. Severity levels follow `criteria/shared/severity-levels.md`.
 

@@ -1,6 +1,6 @@
 # Technical Writing Reference Checklist
 
-Canonical reference for evaluating the quality of technical writing in documentation, comments, READMEs, guides, and other prose within a codebase. Complements the inlined criteria in `review-documentation.md`.
+Canonical reference for evaluating the quality of technical writing in documentation, comments, READMEs, guides, and other prose within a codebase. Complements the inlined criteria in `review-docs.md`.
 
 The `documentation-reviewer` agent uses this file as a lookup when evaluating documentation quality. Severity levels follow `criteria/shared/severity-levels.md`.
 

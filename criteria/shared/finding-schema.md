@@ -55,6 +55,7 @@ The agent that produced the finding. Use the agent's canonical identifier:
 | Storage | `storage-reviewer` |
 | Compute | `compute-reviewer` |
 | Accessibility | `accessibility-reviewer` |
+| Observability | `observability-reviewer` |
 
 #### File (required for file-specific findings)
 
