@@ -1,0 +1,41 @@
+# Oversight Agents - Default Configuration
+# These defaults apply when no .oversight.yml is present in the target project.
+
+project:
+  type: auto  # auto-detect from file patterns
+
+agents:
+  always:
+    - security  # Security agent runs on every review
+
+  disabled: []  # No agents disabled by default
+
+  config:
+    security:
+      severity-threshold: low
+    quality:
+      severity-threshold: low
+      max-function-length: 50
+      max-parameters: 5
+      max-nesting-depth: 3
+    architecture:
+      severity-threshold: low
+    devops:
+      severity-threshold: low
+
+# No custom rules by default
+custom-rules: []
+
+# Default exclusions - common generated/vendored paths
+exclude:
+  - "vendor/"
+  - "node_modules/"
+  - ".git/"
+  - "*.min.js"
+  - "*.min.css"
+  - "*.generated.*"
+  - "dist/"
+  - "build/"
+  - "__pycache__/"
+  - ".tox/"
+  - ".mypy_cache/"

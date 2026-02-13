@@ -1,0 +1,80 @@
+# Oversight Agents - Configuration Schema
+# Defines the structure and valid values for .oversight.yml files.
+
+schema:
+  version: 1
+
+  project:
+    type:
+      description: "Project type hint for agent detection"
+      type: string
+      required: false
+      default: "auto"
+      valid_values:
+        - auto
+        - webapp
+        - api
+        - library
+        - cli
+        - infrastructure
+        - networking
+        - virtualization
+        - storage
+        - compute
+        - mixed
+
+  agents:
+    always:
+      description: "Agents that always run regardless of file detection"
+      type: list
+      required: false
+      default: [security]
+      valid_items:
+        - security
+        - quality
+        - architecture
+        - devops
+        - docs
+        - planning
+        - testing
+        - compliance
+        - networking
+        - virtualization
+        - storage
+        - compute
+        - accessibility
+
+    disabled:
+      description: "Agents that never run even if files match"
+      type: list
+      required: false
+      default: []
+      valid_items: "same as agents.always.valid_items"
+
+    config:
+      description: "Per-agent configuration overrides"
+      type: map
+      required: false
+      keys: "agent names"
+      value_schema:
+        severity-threshold:
+          description: "Minimum severity level to report"
+          type: string
+          valid_values: [critical, high, medium, low, info]
+          default: low
+        custom-rules:
+          description: "Additional rules specific to this agent"
+          type: list
+          required: false
+
+  custom-rules:
+    description: "Custom rules applied across all agents"
+    type: list
+    required: false
+    default: []
+
+  exclude:
+    description: "File paths/globs to exclude from review"
+    type: list
+    required: false
+    default: []
