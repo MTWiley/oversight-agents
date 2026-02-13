@@ -1,57 +1,124 @@
 # Oversight Agents
 
-Reusable Claude Code agents for automated code review across security, quality, architecture, DevOps, and infrastructure domains.
+Reusable Claude Code agents for automated code review across security, quality, architecture, DevOps, infrastructure, and operational domains. 14 specialized agents covering enterprise environments from application code to bare-metal compute.
 
-## Quick Start
+## Installation
+
+Clone this repo once to a permanent location on your machine:
 
 ```bash
-# Clone the repo
-git clone <repo-url> ~/tools/oversight-agents
+git clone https://github.com/YOUR-ORG/oversight-agents.git ~/tools/oversight-agents
+```
 
-# Use in any project
-cd /path/to/your-project
+That's it. No dependencies, no build step, no package manager. The agents are plain Markdown files that Claude Code reads directly.
+
+## Usage
+
+### Using in any project
+
+From inside any project, launch Claude Code with `--add-dir` pointing to your local clone:
+
+```bash
+cd ~/projects/my-webapp
 claude --add-dir ~/tools/oversight-agents
 ```
 
-Then invoke any review command:
+This makes all `/review-*` slash commands available in that session without copying any files into your project. Your project stays clean — no dotfiles, no config, no dependencies added.
 
 ```
-/review                    # Auto-detect relevant agents and review changes
-/review-security           # Security-focused review of changed files
-/review-security full      # Security review of entire repo
-/review-quality            # Code quality review
-/review-architecture       # Architecture review
-/review-devops             # DevOps/platform review
-/review-pick security,quality   # Run specific agents
+/review                          # Auto-detect relevant agents and review changes
+/review full                     # Auto-detect and review entire repo
+/review-security                 # Security-focused review of changed files
+/review-security full            # Security review of entire repo
+/review-pick security,quality    # Run specific agents
+/review-pick networking,devops full  # Specific agents on full repo
 ```
+
+### Using across multiple projects
+
+The same clone works for every project. Just point `--add-dir` at it:
+
+```bash
+# Web app
+cd ~/projects/my-webapp
+claude --add-dir ~/tools/oversight-agents
+
+# Network automation
+cd ~/projects/network-configs
+claude --add-dir ~/tools/oversight-agents
+
+# Terraform infrastructure
+cd ~/projects/infra-as-code
+claude --add-dir ~/tools/oversight-agents
+```
+
+Each project gets the same agents. The orchestrator auto-detects which agents are relevant based on each project's file types — a web app activates security + quality + architecture + testing, while a network automation repo activates security + networking + devops.
+
+### Recommended: shell alias
+
+To avoid typing the `--add-dir` path every time, add an alias to your shell profile:
+
+```bash
+# Add to ~/.bashrc, ~/.zshrc, or ~/.config/fish/config.fish
+alias claude-review='claude --add-dir ~/tools/oversight-agents'
+```
+
+Then use it anywhere:
+
+```bash
+cd ~/projects/anything
+claude-review
+# All /review-* commands are available
+```
+
+### Updating
+
+To get the latest agents, pull the repo:
+
+```bash
+cd ~/tools/oversight-agents && git pull
+```
+
+The next time you run `claude --add-dir`, it picks up the updated agents automatically.
 
 ## Available Agents
 
-### Phase 1 (Available Now)
+### Orchestration
+
+| Command | Purpose |
+|---------|---------|
+| `/review` | Auto-detects and runs all relevant agents, unified report |
+| `/review-pick` | Run a named subset of agents |
+| `/review-configure` | View/initialize project `.oversight.yml` |
+
+### Core Agents
 
 | Command | Scope |
 |---------|-------|
-| `/review` | Orchestrator - auto-detects and runs relevant agents |
 | `/review-security` | Secrets, vulnerabilities, enterprise security posture |
 | `/review-quality` | Code smells, anti-patterns, maintainability |
 | `/review-architecture` | Design patterns, scalability, coupling |
 | `/review-devops` | CI/CD, IaC, containers, config hygiene |
-| `/review-pick` | Run a named subset of agents |
-| `/review-configure` | View/initialize project configuration |
 
-### Phase 2 (Planned)
+### Domain Agents
 
 | Command | Scope |
 |---------|-------|
 | `/review-docs` | Technical writing, reproducibility, completeness |
-| `/review-planning` | Project planning, milestone tracking |
-| `/review-testing` | Coverage, test quality, edge cases |
+| `/review-planning` | Project planning, milestone tracking, progress |
+| `/review-testing` | Coverage, test quality, edge cases, test strategy |
 | `/review-compliance` | Licenses, regulatory, audit readiness |
-| `/review-networking` | Routing, ACLs, firewalls, BGP/OSPF, DNS |
-| `/review-virtualization` | Hypervisor configs, HA/DRS, templates |
-| `/review-storage` | RAID, replication, backup, volumes |
-| `/review-compute` | Server configs, firmware, capacity |
-| `/review-accessibility` | WCAG, ARIA patterns |
+| `/review-observability` | Logging, metrics, tracing, alerting, SLOs |
+
+### Infrastructure Specialists
+
+| Command | Scope |
+|---------|-------|
+| `/review-networking` | Routing, ACLs, firewalls, BGP/OSPF, DNS, segmentation |
+| `/review-virtualization` | Hypervisor configs, HA/DRS, resource allocation, templates |
+| `/review-storage` | RAID, replication, backup strategy, volumes |
+| `/review-compute` | Server configs, firmware lifecycle, capacity planning |
+| `/review-accessibility` | WCAG 2.1, ARIA patterns, keyboard navigation |
 
 ## Review Scope
 
@@ -97,26 +164,12 @@ agents:
 
 Run `/review-configure init` to generate a starter config, or `/review-configure show` to display current settings.
 
-## Installation Methods
+## How It Works
 
-### Primary: `--add-dir` (Recommended)
-
-```bash
-claude --add-dir ~/tools/oversight-agents
-```
-
-No files copied into your project. Always uses latest version.
-
-### Alternative: Shell Alias
-
-```bash
-# Add to ~/.bashrc or ~/.zshrc
-alias claude-review='claude --add-dir ~/tools/oversight-agents'
-
-# Then use:
-cd /path/to/project
-claude-review
-```
+- **No files are copied** into your project. `--add-dir` tells Claude Code to read the agents directory as additional context.
+- **Agents auto-detect** which checks are relevant based on your project's file types. A Python web app gets security + quality + architecture + testing. A Cisco config repo gets security + networking.
+- **Per-project config** is optional. Drop an `.oversight.yml` in any project to override agent selection, severity thresholds, or add custom rules. Run `/review-configure init` to generate one.
+- **Findings follow a standard schema** across all agents, so output is consistent whether you run one agent or all fourteen.
 
 ## Architecture
 
